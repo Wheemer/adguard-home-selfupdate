@@ -1,5 +1,5 @@
 ---
-name: AdGuard Home Beta (self-updating)
+name: AdGuard Home
 version: 0.1.0
 slug: adguard_beta_selfupdate
 description: Beta-channel AdGuard Home with its built-in updater enabled
