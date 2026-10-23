@@ -1,9 +1,9 @@
 ---
-name: AdGuard Home
-version: dev
-slug: adguard
-description: Network-wide ads & trackers blocking DNS server
-url: https://github.com/hassio-addons/app-adguard-home
+name: AdGuard Home Beta (self-updating)
+version: 0.1.0
+slug: adguard_beta_selfupdate
+description: Beta-channel AdGuard Home with its built-in updater enabled
+url: https://github.com/Wheemer/adguard-home-selfupdate
 ingress: true
 ingress_port: 0
 ingress_stream: true

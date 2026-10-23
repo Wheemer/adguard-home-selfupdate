@@ -7,6 +7,8 @@
 # ==============================================================================
 readonly CONFIG="/data/adguard/AdGuardHome.yaml"
 readonly CONFIG_BACKUP="${CONFIG}.bak"
+readonly BUNDLED_EXECUTABLE="/opt/AdGuardHome/AdGuardHome"
+readonly PERSISTENT_EXECUTABLE="/data/adguard/AdGuardHome"
 readonly NETWORK_WAIT_SECONDS=300
 readonly NETWORK_POLL_SECONDS=5
 declare network_ready="false"
@@ -29,6 +31,16 @@ function config_is_valid() {
 if ! bashio::fs.file_exists "${CONFIG}"; then
     mkdir -p /data/adguard
     cp /etc/adguard/AdGuardHome.yaml "${CONFIG}"
+fi
+
+# Home Assistant normally replaces an app image as a whole, so the upstream
+# app intentionally disables AdGuard Home's own updater.  Keep the executable
+# in persistent app data instead: AdGuard can safely replace this copy and the
+# selected beta channel then survives an app restart or wrapper update.
+if [[ ! -x "${PERSISTENT_EXECUTABLE}" ]]; then
+    bashio::log.info "Seeding persistent AdGuard Home beta executable..."
+    install -D -m 0755 "${BUNDLED_EXECUTABLE}" "${PERSISTENT_EXECUTABLE}" \
+        || bashio::exit.nok 'Failed seeding persistent AdGuard Home executable'
 fi
 
 # The configuration can end up empty or truncated, for example after a power

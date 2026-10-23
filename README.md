@@ -14,6 +14,16 @@
 
 Network-wide ads & trackers blocking DNS server.
 
+## Beta self-update variant
+
+This fork starts from the upstream Community App wrapper but intentionally
+uses the AdGuard Home beta channel and enables AdGuard Home's built-in updater.
+The executable is seeded into persistent app storage on first start, so an
+update initiated from the AdGuard Home UI survives Home Assistant App restarts.
+
+This is intentionally separate from the upstream App and uses the slug
+`adguard_beta_selfupdate`.
+
 ![The AdGuard Home Home Assistant App](images/screenshot.png)
 
 ## About
